@@ -41,7 +41,7 @@ Using this information, it generates personalized subject and subject recommenda
 ## **Installation Guide**  
 ### Clone the Repository  
 ```bash
-git clone https://github.com/Olamieee/IGA_Capstone.git
+git clone https://github.com/rumunyana/IGA_HIFADHI.git
 ```
 
 ### Create a Virtual Environment  

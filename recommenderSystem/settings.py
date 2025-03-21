@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-t#(lv#kif@pmei5*udh(o$_&s27xip6jetqe!=r!he#lc_8=0i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['web-production-a4933.up.railway.app']
+ALLOWED_HOSTS = ['https://web-production-7bb0d3.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-a4933.up.railway.app"
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'recommenderSystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASE_URL = "postgresql://postgres:FPPFblRFxAsMhTLyeLTRaVnwHDPmjxCm@mainline.proxy.rlwy.net:26412/railway"
+DATABASE_URL = "postgresql://postgres:RVWFftYAliJLUuybDOEIsefYTDlJjtCG@trolley.proxy.rlwy.net:16301/railway"
 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL)
@@ -135,7 +135,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'alongeola16@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = 'iqetwalfcspmavlc'  # Your app password (not your regular password)
-DEFAULT_FROM_EMAIL = 'SRS <alongeola16@gmail.com>'
-SITE_URL = 'http://web-production-a4933.up.railway.app/'
+EMAIL_HOST_USER = 'rolineumunyana12@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'uupwknuqigdzmtqk'  # Your app password (not your regular password)
+DEFAULT_FROM_EMAIL = 'IGA HIFADHI <rolineumunyana12@gmail.com>'
+SITE_URL = 'https://web-production-7bb0d3.up.railway.app/'
