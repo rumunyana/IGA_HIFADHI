@@ -253,9 +253,9 @@ def student_signup(request):
         
         # Validate form data
         if password != confirm_password:
-            return render(request, 'student_signup.html', {'error_message': 'Passwords do not match', 'schools': schools})
+            return render(request, 'register_student.html', {'error_message': 'Passwords do not match', 'schools': schools})
         if len(password) < 8 or not re.search(r'[A-Z]', password) or not re.search(r'[a-z]', password) or not re.search(r'[0-9]', password) or not re.search(r'[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]', password):
-            return render(request, 'student_signup.html', {'error_message': 'Password must contain at least 8 characters, including uppercase, lowercase, number, and special character.','schools': schools})
+            return render(request, 'register_student.html', {'error_message': 'Password must contain at least 8 characters, including uppercase, lowercase, number, and special character.','schools': schools})
         # Find user by email
         try:
             user = User.objects.get(username=email)
@@ -265,13 +265,13 @@ def student_signup(request):
                 otp_obj = OTPVerification.objects.filter(user=user).latest('created_at')
                 
                 if not otp_obj.is_valid():
-                    return render(request, 'student_signup.html', {
+                    return render(request, 'register_student.html', {
                         'error_message': 'OTP has expired. Please request a new one.',
                         'schools': schools
                     })
                 
                 if otp_obj.otp != otp:
-                    return render(request, 'student_signup.html', {
+                    return render(request, 'register_student.html', {
                         'error_message': 'Invalid OTP. Please try again.',
                         'schools': schools
                     })
@@ -281,7 +281,7 @@ def student_signup(request):
                 try:
                     school = School.objects.get(id=school_id)
                 except School.DoesNotExist:
-                    return render(request, 'student_signup.html', {
+                    return render(request, 'register_student.html', {
                         'error_message': 'Invalid school selected',
                         'schools': schools
                     })
@@ -308,13 +308,13 @@ def student_signup(request):
                 return redirect('home')
                 
             except OTPVerification.DoesNotExist:
-                return render(request, 'student_signup.html', {
+                return render(request, 'register_student.html', {
                     'error_message': 'Please click "Get OTP" to receive a verification code.',
                     'schools': schools
                 })
                 
         except User.DoesNotExist:
-            return render(request, 'student_signup.html', {
+            return render(request, 'register_student.html', {
                 'error_message': 'Please click "Get OTP" to receive a verification code.',
                 'schools': schools
             })
@@ -364,7 +364,7 @@ def teacher_signup(request):
         
         # Validate form data
         if password != confirm_password:
-            return render(request, 'teacher_signup.html', {'error_message': 'Passwords do not match', 'schools': schools})
+            return render(request, 'register_teacher.html', {'error_message': 'Passwords do not match', 'schools': schools})
         
         # Find user by email
         try:
@@ -375,13 +375,13 @@ def teacher_signup(request):
                 otp_obj = OTPVerification.objects.filter(user=user).latest('created_at')
                 
                 if not otp_obj.is_valid():
-                    return render(request, 'teacher_signup.html', {
+                    return render(request, 'register_teacher.html', {
                         'error_message': 'OTP has expired. Please request a new one.',
                         'schools': schools
                     })
                 
                 if otp_obj.otp != otp:
-                    return render(request, 'teacher_signup.html', {
+                    return render(request, 'register_teacher.html', {
                         'error_message': 'Invalid OTP. Please try again.',
                         'schools': schools
                     })
@@ -391,7 +391,7 @@ def teacher_signup(request):
                 try:
                     school = School.objects.get(id=school_id)
                 except School.DoesNotExist:
-                    return render(request, 'teacher_signup.html', {
+                    return render(request, 'register_teacher.html', {
                         'error_message': 'Invalid school selected',
                         'schools': schools
                     })
@@ -419,13 +419,13 @@ def teacher_signup(request):
                 return redirect('teacher_dashboard')
                 
             except OTPVerification.DoesNotExist:
-                return render(request, 'teacher_signup.html', {
+                return render(request, 'register_teacher.html', {
                     'error_message': 'Please click "Get OTP" to receive a verification code.',
                     'schools': schools
                 })
                 
         except User.DoesNotExist:
-            return render(request, 'teacher_signup.html', {
+            return render(request, 'register_teacher.html', {
                 'error_message': 'Please click "Get OTP" to receive a verification code.',
                 'schools': schools
             })
