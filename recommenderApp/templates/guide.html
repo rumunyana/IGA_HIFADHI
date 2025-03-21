@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'css/favicon-96x96.png' %}" sizes="96x96" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Guide - Student Counseling System</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <a href="{% url 'home' %}" class="back-home-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+    <!-- Guide Container -->
+    <div class="guide-container">
+        <h2 class="guide-title">📘 Student Guide</h2>
+        <p class="guide-intro">
+            Welcome to the Student Counseling System! Follow these steps to explore the platform and receive personalized academic recommendations.
+        </p>
+
+        <!-- Register/Login Section -->
+        <div class="guide-section">
+            <h3>🚀 Register/Login</h3>
+            <p>
+                To begin, you need to create an account or log in. This ensures that your information is saved securely, and you can access your personalized recommendations at any time. 
+                Simply enter your <strong>full name, email, password, and school name</strong> during registration. If you already have an account, log in with your <strong>email and password</strong>.
+            </p>
+        </div>
+
+        <!-- Fill the Form Section -->
+        <div class="guide-section">
+            <h3>📝 Fill the Form</h3>
+            <p>
+                Once logged in, click on the <strong>"Get Started"</strong> button to be directed to the form. 
+                Here, you will need to <strong>enter key details about yourself</strong>, such as your academic strengths, interests, school type, and parental career background. 
+                These inputs help the system understand your preferences and provide tailored guidance.
+            </p>
+        </div>
+
+        <!-- Get Recommendations Section -->
+        <div class="guide-section">
+            <h3>📌 Get Recommendations</h3>
+            <p>
+                After submitting the form, the system will analyze your responses and suggest <strong>the best-fit subject for you</strong> along with <strong>three additional subject recommendations</strong>. 
+                Each recommendation is based on a combination of your interests, strengths, and future job market demand.
+            </p>
+        </div>
+
+        <!-- IQ Test Section -->
+        <div class="guide-section">
+            <h3>🧠 Take the IQ Test</h3>
+            <p>
+                Enhance your recommendations by taking our IQ test. The test evaluates your <strong>logical, verbal, numerical, and spatial abilities</strong> through a series of questions.
+                Your cognitive strengths will be analyzed and used to provide more comprehensive academic path recommendations that align with your natural aptitudes.
+            </p>
+        </div>
+
+        <!-- Enhanced Results Section -->
+        <div class="guide-section">
+            <h3>📊 Enhanced Results</h3>
+            <p>
+                After completing the IQ test, you'll receive enhanced results that show the <strong>compatibility score</strong> between your cognitive strengths and recommended subject areas.
+                This deeper analysis helps you understand how well your natural aptitudes align with different academic paths, giving you more confidence in your educational choices.
+            </p>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="guide-section">
+            <h3>⭐ Share Your Experience</h3>
+            <p>
+                After receiving your recommendations, you can share your experience by submitting a testimonial. Rate the helpfulness of the recommendation and provide comments about your experience.
+                Your feedback helps other students and contributes to improving the system for everyone.
+            </p>
+        </div>
+
+        <!-- Feedback Section -->
+        <div class="guide-section">
+            <h3>💬 View Teacher Feedback</h3>
+            <p>
+                Visit the <strong><a href="{% url 'student_feedback' %}">Feedback</a></strong> section to view comments and recommendation changes from your teachers. Teachers can provide personalized guidance and may sometimes override system recommendations based on their knowledge of your abilities and potential.
+                You can see when a teacher has changed your recommended subject and their reasoning behind the change, giving you valuable insights from education professionals.
+            </p>
+        </div>
+
+        <!-- Contact Support Section -->
+        <div class="guide-section">
+            <h3>📞 Contact Support</h3>
+            <p>
+                Need assistance? If you encounter any issues or have questions about how the system works, visit the <strong><a href="{% url 'contact' %}">Contact</a></strong> page to get in touch with our support team. We're here to help!
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

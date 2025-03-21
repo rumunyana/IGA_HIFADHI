@@ -1,0 +1,8 @@
+﻿django
+scikit-learn
+seaborn
+gunicorn
+matplotlib
+psycopg2-binary
+dj-database-url
+whitenoise

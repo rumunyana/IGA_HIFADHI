@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'css/favicon-96x96.png' %}" sizes="96x96" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Feedback | Student Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #3498db;
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            border-left: 4px solid #3498db;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        .card-header .date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #7f8c8d;
+        }
+
+        .empty-state svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            color: #bdc3c7;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 0.5rem;
+            color: #34495e;
+        }
+
+        .empty-state p {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Override section styles */
+        .section-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .override-card {
+            border-left: 4px solid #e74c3c; /* Different color for overrides */
+        }
+
+        .override-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .override-detail {
+            margin-bottom: 0.5rem;
+        }
+
+        .override-detail strong {
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .change-arrow {
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 0 0.5rem;
+        }
+
+        .override-reason {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid #3498db;
+            margin-top: 0.5rem;
+        }
+
+        /* Add these styles to your existing <style> section */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                /* Slightly wider container on mobile */
+                margin: 1rem auto;
+                /* Reduced vertical margins */
+            }
+
+            .header {
+                padding: 1rem;
+                /* Keep the flex layout as is to maintain the button position */
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .card-header h2 {
+                font-size: 1.1rem;
+            }
+
+            .card-body {
+                padding: 1rem;
+            }
+
+            .empty-state {
+                padding: 2rem 1rem;
+            }
+
+            .override-details {
+                flex-direction: column;
+            }
+        }
+
+        /* Add for very small screens */
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                margin: 0;
+            }
+
+            .header {
+                border-radius: 0;
+                /* Still maintaining horizontal layout */
+            }
+
+            .content {
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>My Feedback</h1>
+            <a href="{% url 'home' %}" class="back-link">Back</a>
+        </div>
+        <div class="content">
+            <!-- Teacher Overrides Section -->
+            <h2 class="section-title">Recommendation Overrides</h2>
+            {% if override_entries %}
+                {% for override in override_entries %}
+                <div class="card override-card">
+                    <div class="card-header">
+                        <h2>Override by {{ override.teacher.full_name }}</h2>
+                        <div class="date">{{ override.timestamp|date:"F j, Y - g:i A" }}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="override-details">
+                            <div class="override-detail">
+                                <strong>Previous Recommendation:</strong> 
+                                {% if override.old_recommendation == 0 %}Arts
+                                {% elif override.old_recommendation == 1 %}Business
+                                {% elif override.old_recommendation == 2 %}Healthcare
+                                {% elif override.old_recommendation == 3 %}Humanities
+                                {% elif override.old_recommendation == 4 %}STEM
+                                {% endif %}
+                            </div>
+                            <div class="change-arrow">→</div>
+                            <div class="override-detail">
+                                <strong>Changed To:</strong> 
+                                {% if override.new_recommendation == 0 %}Arts
+                                {% elif override.new_recommendation == 1 %}Business
+                                {% elif override.new_recommendation == 2 %}Healthcare
+                                {% elif override.new_recommendation == 3 %}Humanities
+                                {% elif override.new_recommendation == 4 %}STEM
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="override-reason">
+                            <strong>Reason:</strong> {{ override.reason|default:"No reason provided" }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <h3>No Overrides</h3>
+                    <p>Your recommendations haven't been adjusted by any teachers yet.</p>
+                </div>
+            {% endif %}
+
+            <!-- Teacher Feedback Section (Original) -->
+            <h2 class="section-title">Teacher(s) Feedback</h2>
+            {% if feedback_entries %}
+            {% for entry in feedback_entries %}
+            <div class="card">
+                <div class="card-header">
+                    <h2>Feedback from {{ entry.teacher.full_name }}</h2>
+                    <div class="date">{{ entry.timestamp|date:"F j, Y - g:i A" }}</div>
+                </div>
+                <div class="card-body">
+                    <p>{{ entry.feedback|linebreaks }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                </svg>
+                <h3>No Feedback Yet</h3>
+                <p>Your teachers haven't left any feedback for you yet. Check back later!</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
