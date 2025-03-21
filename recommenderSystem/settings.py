@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'recommenderSystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASE_URL = "postgresql://postgres:RVWFftYAliJLUuybDOEIsefYTDlJjtCG@trolley.proxy.rlwy.net:16301/railway"
+DATABASE_URL = "postgresql://postgres:NiGCsEBMsDpTSeGzLZUKpeQlnCdwXoUy@switchback.proxy.rlwy.net:23411/railway"
 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL)
