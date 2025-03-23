@@ -139,3 +139,4 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Your app password (not your regular password)
 DEFAULT_FROM_EMAIL = 'IGA HIFADHI <rolineumunyana12@gmail.com>'
 SITE_URL = 'https://web-production-7863e.up.railway.app//'
+
