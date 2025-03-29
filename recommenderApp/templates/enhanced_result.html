@@ -183,6 +183,14 @@
             color: #7b1fa2;
         }
 
+        .explanation-box {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #4a7afd;
+        }
+
         .recommendation-section {
             margin-top: 40px;
             border-top: 1px solid #e0e0e0;
@@ -303,6 +311,45 @@
             margin-top: 0;
             color: #4a7afd;
             font-size: 1.3rem;
+        }
+
+        .scoring-legend {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .scoring-legend h4 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+
+        .legend-label {
+            font-size: 0.9rem;
+            color: #555;
         }
 
         .action-buttons {
@@ -568,23 +615,31 @@
                 </div>
 
                 <div class="results-content">
+                    <!-- What These Results Mean section -->
+                    <div class="explanation-box">
+                        <h4>What These Results Mean</h4>
+                        <p>Based on your assessment, we've analyzed your cognitive strengths and matched them with potential career paths. 
+                        The scores below represent your abilities in different areas, with higher scores indicating stronger performance.</p>
+                        <p>Our recommendations are based on how well your cognitive strengths align with the typical requirements of various career fields.</p>
+                    </div>
+
                     <div class="stats-grid">
                         <div class="stat-card">
                             <p class="stat-label">Cognitive Score</p>
                             <p class="stat-value">{{ iq_result.total_score }}</p>
-                            <p class="stat-description">Your overall cognitive performance</p>
+                            <p class="stat-description">Your overall cognitive performance (out of 150)</p>
                         </div>
 
                         <div class="stat-card">
                             <p class="stat-label">Compatibility</p>
                             <p class="stat-value">{{ compatibility_score }}%</p>
-                            <p class="stat-description">Match with recommended field</p>
+                            <p class="stat-description">How well your strengths match with {{ predicted_subject }}</p>
                         </div>
 
                         <div class="stat-card">
                             <p class="stat-label">Best Field</p>
                             <p class="stat-value">{{ predicted_subject }}</p>
-                            <p class="stat-description">Your most suitable career path</p>
+                            <p class="stat-description">Your most suitable career path based on assessment</p>
                         </div>
                     </div>
 
@@ -655,6 +710,13 @@
                             </div>
                         </div>
 
+                        <div class="scoring-legend">
+                            <h4>Rating Scale</h4>
+                            <p><strong>1-2:</strong> Developing - You're building your skills in this area<br>
+                               <strong>3:</strong> Proficient - You have solid skills in this area<br>
+                               <strong>4-5:</strong> Advanced - This is a significant strength for you</p>
+                        </div>
+
                         <p>Your cognitive assessment shows particular strengths in
                             {% for area in cognitive_strengths %}
                             {% if forloop.last and not forloop.first %}and <strong>{{ area }}</strong>{% elif forloop.first and
@@ -675,6 +737,12 @@
                                 <div class="compatibility-value">{{ compatibility_score }}%</div>
                             </div>
                         </div>
+                        
+                        <!-- Compatibility explanation -->
+                        <div class="explanation-box">
+                            <h4>How Compatibility Is Calculated</h4>
+                            <p>Your compatibility score with {{ predicted_subject }} is determined by how closely your cognitive strengths align with the typical requirements of this field. A score above 80% indicates an excellent match, 65-80% indicates a good match, and below 65% suggests you may face some challenges but could still succeed with dedication.</p>
+                        </div>
 
                         <p>You might also want to explore these alternative fields:</p>
                         <ul class="subject-list">
@@ -689,6 +757,21 @@
                             </li>
                             {% endfor %}
                         </ul>
+                        
+                        <!-- Field Tags explanation -->
+                        <div class="scoring-legend">
+                            <h4>Field Tag Guide</h4>
+                            <div class="legend-grid">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background-color: #e8f5e9;"></div>
+                                    <span class="legend-label">Cognitive Strength: Matches your strongest abilities</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background-color: #fff3e0;"></div>
+                                    <span class="legend-label">Interest Match: Aligns with your stated interests</span>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="conclusion-box">
                             <h4>Analysis Summary</h4>
@@ -717,8 +800,7 @@
                 <!-- Testimonial Section -->
                 <div class="card feedback-card">
                     <h3 class="feedback-title">Share Your Experience</h3>
-                    <p class="feedback-subtitle">How helpful was this recommendation? Leave your feedback to help other
-                        students.</p>
+                    <p class="feedback-subtitle">How helpful was this recommendation? Your feedback helps improve our system and assists other students.</p>
                     {% if user and prediction_found and not is_temporary %}
                     {% if testimonial_success %}
                     <div class="success-message">Your testimonial has been submitted successfully!</div>
@@ -744,7 +826,7 @@
 
                         <div class="textarea-container">
                             <textarea name="content" class="feedback-textarea" rows="4"
-                                placeholder="Share your thoughts on the recommendation..." required aria-label="Your feedback"></textarea>
+                                placeholder="Was this recommendation useful? What actions will you take based on these results?" required aria-label="Your feedback"></textarea>
                         </div>
 
                         <div class="submit-container">
