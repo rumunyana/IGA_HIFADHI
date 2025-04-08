@@ -119,13 +119,16 @@ Now, open **`http://127.0.0.1:8000/`** in your browser to access the system.
 │── requirements.txt         # Dependencies.
 │── README.md                # Project Documentation.
 ```  
-Deployment
+## Deployment
+
 The application is deployed on:
 
 Railway: [click here](https://web-production-7863e.up.railway.app/)
 
-License
+## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Contributors
+## Contributors
+
 ROLINE UMUNYANA
